@@ -1,7 +1,7 @@
 declare global {
     namespace Cypress {
         interface Chainable {
-            visitTo(path?: string): Chainable<AUTWindow>;
+            visitTo(path?: string, options?: Partial<Cypress.VisitOptions>): Chainable<AUTWindow>;
         }
     }
 }

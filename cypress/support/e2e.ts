@@ -16,3 +16,11 @@
 // Import commands.js using ES2015 syntax:
 import '@testing-library/cypress/add-commands';
 import './commands'
+import {handleGlobalError} from "./error-handling";
+
+const installLogsCollector =
+    require("cypress-terminal-report/src/installLogsCollector").default
+    ?? require("cypress-terminal-report/src/installLogsCollector");
+
+installLogsCollector();
+handleGlobalError();

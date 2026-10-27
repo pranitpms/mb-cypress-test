@@ -1,8 +1,7 @@
 import {BaseLocator} from "../../locators/common/base.locator";
 
 export abstract class BasePage<TLocator extends BaseLocator> {
-
-    public get Locator() {
+    public get Locator(): TLocator {
         return this.locator;
     }
 
