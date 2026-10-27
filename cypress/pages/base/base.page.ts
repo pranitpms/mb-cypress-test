@@ -1,10 +1,14 @@
 import {BaseLocator} from "../../locators/common/base.locator";
 
-export abstract class BasePage <TLocator extends BaseLocator> {
+export abstract class BasePage<TLocator extends BaseLocator> {
 
-    public get Locator(){
+    public get Locator() {
         return this.locator;
     }
-    
-    protected constructor(protected locator :TLocator) {  }
+
+    protected constructor(protected locator: TLocator) {
+    }
+
+    private _locale = 'en-AE';
+    public path = (path = '') => `/${this._locale}${path}`;
 }
