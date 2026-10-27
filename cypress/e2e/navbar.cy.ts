@@ -9,24 +9,24 @@ spec.describe('Page Render', () => {
     });
 
     spec.it('Should render Navbar', ({page}) => {
-        const navbarPage = page.navbarPage;
-        navbarPage.Locator.navbar().should('be.visible');
-        navbarPage.Locator.menu(NavMenu.Explore).should('be.visible');
-        navbarPage.Locator.menu(NavMenu.Features).should('be.visible');
-        navbarPage.Locator.menu(NavMenu.OTCDesk).should('be.visible');
-        navbarPage.Locator.menu(NavMenu.Company).should('be.visible');
-        navbarPage.Locator.menu(NavMenu.Support).should('be.visible');
-        navbarPage.Locator.menu(NavMenu.Blog).should('be.visible');
-        navbarPage.Locator.menu(NavMenu.MBG).should('be.visible');
+        const navbarPage = page.homePage;
+        navbarPage.Locator.navbar.header().should('be.visible');
+        navbarPage.Locator.navbar.menu(NavMenu.Explore).should('be.visible');
+        navbarPage.Locator.navbar.menu(NavMenu.Features).should('be.visible');
+        navbarPage.Locator.navbar.menu(NavMenu.OTCDesk).should('be.visible');
+        navbarPage.Locator.navbar.menu(NavMenu.Company).should('be.visible');
+        navbarPage.Locator.navbar.menu(NavMenu.Support).should('be.visible');
+        navbarPage.Locator.navbar.menu(NavMenu.Blog).should('be.visible');
+        navbarPage.Locator.navbar.menu(NavMenu.MBG).should('be.visible');
     });
 
     spec.it('Should have Action menus', ({page}) => {
-        const navbarPage = page.navbarPage;
-        navbarPage.Locator.navbar().within(() => {
-            navbarPage.Locator.languageBtn().should('be.visible');
-            navbarPage.Locator.downloadBtn().should('be.visible');
-            navbarPage.Locator.signIn().should('be.visible');
-            navbarPage.Locator.signUp().should('be.visible');
+        const navbarPage = page.homePage;
+        navbarPage.Locator.navbar.header().within(() => {
+            navbarPage.Locator.navbar.languageBtn().should('be.visible');
+            navbarPage.Locator.navbar.downloadBtn().should('be.visible');
+            navbarPage.Locator.navbar.signIn().should('be.visible');
+            navbarPage.Locator.navbar.signUp().should('be.visible');
         });
     });
 });
@@ -39,19 +39,19 @@ spec.describe('Page Actions', () => {
     spec.testDataProvider(NavItems, 'label');
 
     spec.it('Should navigate to', ({page, data}) => {
-        page.navbarPage.gotTo(data.label);
-        cy.location('pathname').should('eq', page.navbarPage.path(data.path));
+        page.homePage.gotTo(data.label);
+        cy.location('pathname').should('eq', page.homePage.path(data.path));
         cy.contains('h1', data.h1).should('be.visible');
     });
 
     spec.it('$MBG Should points to token.multibankgroup.com', ({page}) => {
-        page.navbarPage.Locator.menu(NavMenu.MBG).should('be.visible');
-        page.navbarPage.Locator.menu(NavMenu.MBG).should('have.attr', 'href')
+        page.homePage.Locator.navbar.menu(NavMenu.MBG).should('be.visible');
+        page.homePage.Locator.navbar.menu(NavMenu.MBG).should('have.attr', 'href')
             .and('include', 'token.multibankgroup.com');
     });
 
     spec.it('Sign in / Sign up target trade.mb.io (href only, no click)', ({page}) => {
-        page.navbarPage.Locator.signIn().should('have.attr', 'href').and('include', 'trade.mb.io');
-        page.navbarPage.Locator.signUp().should('have.attr', 'href').and('include', 'trade.mb.io');
+        page.homePage.Locator.navbar.signIn().should('have.attr', 'href').and('include', 'trade.mb.io');
+        page.homePage.Locator.navbar.signUp().should('have.attr', 'href').and('include', 'trade.mb.io');
     });
 });

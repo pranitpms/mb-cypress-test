@@ -2,7 +2,8 @@ import {Page, PageObject} from "./factory/page-object.factory";
 
 type SpecFixture = {
     page: PageObject,
-    data?: any
+    data?: any,
+    index?: number,
 }
 type SpecFunc = (this: Mocha.Context, specFixture: SpecFixture) => void;
 type SuiteFunc = (this: Mocha.Suite, specFixture: SpecFixture) => void
@@ -23,14 +24,22 @@ class SpecHelper {
         this._testDataKey = key;
     }
 
+    public beforeEach = (hookFunc: SpecFunc) => {
+        beforeEach(function (this: Mocha.Context) {
+            const specFixture: SpecFixture = {page: Page}
+            hookFunc.call(this, specFixture);
+        });
+    }
+
     public describe = (name: string, suiteFunc: SuiteFunc) => {
         if (this._scenarioDataProvider && this._scenarioDataProvider.length > 0) {
             this._scenarioDataProvider.forEach((data: any, index) => {
-                const testName: string = this.resolveName(name, data, index);
+                const testName: string = this.resolveName(name, data, index, this._scenarioTestDataKey);
                 describe(testName, function (this: Mocha.Suite) {
                     const specFixture: SpecFixture = {
                         page: Page,
-                        data: data
+                        data: data,
+                        index: index
                     }
                     suiteFunc.call(this, specFixture);
                 });
@@ -48,11 +57,12 @@ class SpecHelper {
     public it = (name: string, testFunc: SpecFunc) => {
         if (this._testDataProvider && this._testDataProvider.length > 0) {
             this._testDataProvider.forEach((data: any, index) => {
-                const testName: string = this.resolveName(name, data, index);
+                const testName: string = this.resolveName(name, data, index, this._testDataKey);
                 it(testName, function (this: Mocha.Context) {
                     const specFixture: SpecFixture = {
                         page: Page,
-                        data: data
+                        data: data,
+                        index: index
                     }
                     testFunc.call(this, specFixture);
                 });
@@ -67,12 +77,12 @@ class SpecHelper {
         }
     }
 
-    private resolveName(name: string, data: any | {}, index: number) {
-        if (this._testDataKey && this.isObject(data)) {
-            const value = data[this._testDataKey];
+    private resolveName(name: string, data: any | {}, index: number, dataKey?: string) {
+        if (dataKey && this.isObject(data)) {
+            const value = data[dataKey];
             return `${name} - ${value}`;
         }
-        return `${index} - ${name}`;
+        return `${index + 1} - ${name} - ${data}`;
     }
 
     private isObject(value: unknown): value is Record<string, unknown> {

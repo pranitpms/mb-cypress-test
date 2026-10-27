@@ -1,10 +1,16 @@
-import {NavbarPage} from "../../pages/navbar.page";
+import {HomePage} from "../../pages/home.page";
+import {ExplorePage} from "../../pages/explore.page";
+import {CompanyPage} from "../../pages/company.page";
 
-export class PageObject{
-    public readonly navbarPage: NavbarPage;
+export class PageObject {
+    public readonly homePage: HomePage;
+    public readonly explorePage: ExplorePage;
+    public readonly companyPage: CompanyPage;
 
     constructor() {
-        this.navbarPage = new NavbarPage();
+        this.homePage = new HomePage();
+        this.explorePage = new ExplorePage();
+        this.companyPage = new CompanyPage();
     }
 }
 
