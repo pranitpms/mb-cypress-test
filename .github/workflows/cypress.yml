@@ -10,8 +10,6 @@ on:
         description: "Base URL to test"
         required: false
         default: "https://mb.io/en-AE"
-  schedule:
-    - cron: "0 5 * * *"
 
 concurrency:
   group: cypress-${{ github.ref }}
