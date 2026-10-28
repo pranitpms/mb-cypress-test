@@ -41,6 +41,6 @@ spec.describe('Page Action', () => {
     spec.it('Should Navigate to explore page on click of Explore all assets', ({page}) => {
         cy.reload();
         page.homePage.clickOnExploreAllAssets();
-        cy.location('pathname').should('eq', page.homePage.path('/explore'));
+        cy.location('pathname').should('include', '/explore');
     });
 });

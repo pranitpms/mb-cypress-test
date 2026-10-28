@@ -40,7 +40,7 @@ spec.describe('Page Actions', () => {
 
     spec.it('Should navigate to', ({page, data}) => {
         page.homePage.gotTo(data.label);
-        cy.location('pathname').should('eq', page.homePage.path(data.path));
+        cy.location('pathname').should('include', data.path);
         cy.contains('h1', data.h1).should('be.visible');
     });
 

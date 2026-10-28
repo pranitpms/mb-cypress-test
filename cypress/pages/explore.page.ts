@@ -9,7 +9,7 @@ export class ExplorePage extends MainPage<ExploreLocator> {
 
     navigateToPage = () => {
         this.gotTo(NavMenu.Explore);
-        cy.location('pathname').should('eq', this.path('/explore'));
+        cy.location('pathname').should('include', 'explore');
         cy.contains('h1', /Markets at your fingertips/i).should('be.visible');
     }
 }

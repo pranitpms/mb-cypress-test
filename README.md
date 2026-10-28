@@ -149,6 +149,14 @@ npm run cy:run:firefox    # Firefox
 npm run cy:run:edge       # Edge
 ```
 
+Chrome ->
+![chrome-testrun.png](assets/test-result/chrome-testrun.png)
+![chrome.png](assets/test-result/chrome.png)
+
+Edge->
+![edge-testrun.png](assets/test-result/edge-testrun.png)
+![edge.png](assets/test-result/edge.png)
+
 ## 6. Framework and design decisions
 
 | Decision                                                               | Reason                                                                                                                                                                                               |
