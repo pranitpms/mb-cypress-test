@@ -19,9 +19,7 @@ No login, personal data, or form submission is used anywhere in the suite.
 8. [Test plan](#8-test-plan)
 9. [Release readiness checklist](#9-release-readiness-checklist)
 10. [Risk matrix](#10-risk-matrix)
-11. [Task 2: written responses](#11-task-2-written-responses)
-12. [Commit history convention](#12-commit-history-convention)
-13. [Known limitations](#13-known-limitations)
+11. [Task 2 - QA Strategy & Thinking](#11Task-2-QA-Strategy-&-Thinking)
 
 ---
 
@@ -111,8 +109,8 @@ mb-cypress-test/
 | Firefox                      | `npm run cy:run:firefox`                                             |
 | Edge                         | `npm run cy:run:edge`                                                |
 | All browsers in sequence     | `npm run test:all-browsers`                                          |
-| One spec                     | `npx cypress run --spec "cypress/e2e/negative/invalid-routes.cy.js"` |
-| Only the negative suite      | `npx cypress run --spec "cypress/e2e/negative/**/*.cy.js"`           |
+| One spec                     | `npx cypress run --spec "cypress/e2e/negative/invalid-routes.cy.ts"` |
+| Only the negative suite      | `npx cypress run --spec "cypress/e2e/negative/**/*.cy.ts"`           |
 | Against another environment  | `CYPRESS_BASE_URL=https://staging.example.com npm test`              |
 
 Recommended `scripts` block for `package.json` (adds `test`, `edge` and the all-browsers runner to what you already
